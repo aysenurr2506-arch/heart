@@ -1,21 +1,22 @@
 body {
     display: flex;
-    flex-direction: column; /* Öğeleri dikeyde hizalamak için */
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #000; /* Siyah arka plan */
+    background-color: #000;
     margin: 0;
     overflow: hidden;
 }
 
 .heart-container {
     position: relative;
-    /* İyileştirilmiş kalp boyutları */
-    width: 250px; 
-    height: 225px; 
+    width: 200px; /* Kalp kapsayıcısının boyutu */
+    height: 180px; /* Kalp kapsayıcısının boyutu */
     transform: rotate(-45deg); /* Kalp şekli için döndürme */
-    cursor: pointer; /* Tıklanabilir olduğunu belirtmek için */
+    cursor: pointer;
+    /* Gerekirse kapsayıcıya bir kenarlık ekleyerek sınırlarını görebilirsiniz */
+    /* border: 1px dashed gray; */ 
 }
 
 /* Kalp Şeklini Oluşturan 3 Parça */
@@ -24,59 +25,56 @@ body {
 .heart::after {
     content: '';
     position: absolute;
-    /* Kalp parçalarının boyutları */
-    width: 125px; 
-    height: 125px;
+    width: 100px; /* Her bir yuvarlak parçanın boyutu */
+    height: 100px; /* Her bir yuvarlak parçanın boyutu */
     background-color: #ff007f; /* Pembe kalp rengi */
     border-radius: 50%; /* Yuvarlak kenarlar */
     box-shadow: 0 0 20px rgba(255, 0, 127, 0.7); /* Temel parlama */
 }
 
 .heart {
-    /* Kalp alt noktasının konumu */
-    left: 62.5px; 
-    top: 55px; 
-    animation: pulse 1.5s infinite alternate; /* Titreme animasyonu */
+    /* Kalbin alt ucu */
+    left: 50px; /* heart-container'ın ortasına hizala (200px / 2 - 100px / 2 = 50px) */
+    top: 40px; /* heart-container'ın üstünden biraz aşağıda */
+    animation: pulse 1.5s infinite alternate;
 }
 
 .heart::before {
     /* Sol üst yuvarlak */
-    left: -62.5px; 
-    top: 0;
+    left: 0; /* heart-container'ın soluna hizala */
+    top: -50px; /* heart'ın üstüne, yarım kendi boyutu kadar yukarı */
 }
 
 .heart::after {
     /* Sağ üst yuvarlak */
-    left: 0;
-    top: -62.5px; 
+    left: 100px; /* heart-container'ın sağına hizala */
+    top: -50px; /* heart'ın üstüne, yarım kendi boyutu kadar yukarı */
 }
 
 /* Neon parlama efekti için ayrı katman */
 .heart-glow {
-    background-color: transparent; /* İç rengi şeffaf */
+    background-color: transparent;
     box-shadow:
-        0 0 20px 5px rgba(255, 0, 127, 0.9), /* Pembe parlama */
-        0 0 40px 10px rgba(0, 255, 255, 0.7), /* Mavi tonlu parlama */
-        0 0 80px 20px rgba(255, 105, 180, 0.5); /* Mora çalan dış parlama */
-    animation: 
-        pulse 1.5s infinite alternate, 
-        neon-glow 2s infinite alternate; /* Parlama animasyonu */
+        0 0 20px 5px rgba(255, 0, 127, 0.9),
+        0 0 40px 10px rgba(0, 255, 255, 0.7),
+        0 0 80px 20px rgba(255, 105, 180, 0.5);
+    animation:
+        pulse 1.5s infinite alternate,
+        neon-glow 2s infinite alternate;
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1; /* Ana kalbin arkasında kalması için */
+    z-index: -1;
 }
-
 
 /* Mesaj Stilleri */
 #message {
     font-family: 'Arial', sans-serif;
     font-size: 3em;
     color: #fff;
-    /* Güçlü neon metin parlama efekti */
-    text-shadow: 
+    text-shadow:
         0 0 7px #fff,
         0 0 10px #fff,
         0 0 21px #ff007f,
@@ -84,23 +82,22 @@ body {
         0 0 82px #ff007f,
         0 0 92px #ff007f,
         0 0 102px #ff007f,
-        0 0 151px #ff007f; 
-    margin-top: 50px; 
-    opacity: 0; /* Başlangıçta gizle */
-    transition: opacity 0.5s ease-in-out; /* Yumuşak geçiş */
-}
-/
-.visible {
-    opacity: 1 !important; /* Mesajı görünür yapacak sınıf */
+        0 0 151px #ff007f;
+    margin-top: 50px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
 }
 
-/* Kalp titreme animasyonu */
+.visible {
+    opacity: 1 !important;
+}
+
+/* Animasyonlar */
 @keyframes pulse {
     0% { transform: scale(1) rotate(-45deg); }
     100% { transform: scale(1.05) rotate(-45deg); }
 }
 
-/* Neon parlama animasyonu (Titreme) */
 @keyframes neon-glow {
     0% {
         box-shadow: 0 0 20px 5px rgba(255, 0, 127, 0.9), 0 0 40px 10px rgba(0, 255, 255, 0.7), 0 0 80px 20px rgba(255, 105, 180, 0.5);
