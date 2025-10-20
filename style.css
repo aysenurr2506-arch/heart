@@ -1,41 +1,42 @@
 body {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Öğeleri dikeyde hizalamak için */
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #000;
+    background-color: #000; /* Siyah arka plan */
     margin: 0;
     overflow: hidden;
 }
 
 .heart-container {
     position: relative;
-    /* Boyutları artırarak daha belirgin hale getiriyoruz */
+    /* İyileştirilmiş kalp boyutları */
     width: 250px; 
     height: 225px; 
-    transform: rotate(-45deg); 
-    cursor: pointer;
+    transform: rotate(-45deg); /* Kalp şekli için döndürme */
+    cursor: pointer; /* Tıklanabilir olduğunu belirtmek için */
 }
 
+/* Kalp Şeklini Oluşturan 3 Parça */
 .heart,
 .heart::before,
 .heart::after {
     content: '';
     position: absolute;
-    /* Kalp parçalarının boyutlarını artırıyoruz */
+    /* Kalp parçalarının boyutları */
     width: 125px; 
     height: 125px;
-    background-color: #ff007f;
-    border-radius: 50%;
-    box-shadow: 0 0 20px rgba(255, 0, 127, 0.7);
+    background-color: #ff007f; /* Pembe kalp rengi */
+    border-radius: 50%; /* Yuvarlak kenarlar */
+    box-shadow: 0 0 20px rgba(255, 0, 127, 0.7); /* Temel parlama */
 }
 
 .heart {
     /* Kalp alt noktasının konumu */
     left: 62.5px; 
-    top: 55px; /* Kalbin dikey pozisyonu */
-    animation: pulse 1.5s infinite alternate;
+    top: 55px; 
+    animation: pulse 1.5s infinite alternate; /* Titreme animasyonu */
 }
 
 .heart::before {
@@ -50,30 +51,31 @@ body {
     top: -62.5px; 
 }
 
-/* Neon parlama efekti için ayrı bir katman (Boyutları ana kalp ile eşleşmeli) */
+/* Neon parlama efekti için ayrı katman */
 .heart-glow {
-    background-color: transparent;
+    background-color: transparent; /* İç rengi şeffaf */
     box-shadow:
-        0 0 20px 5px rgba(255, 0, 127, 0.9),
-        0 0 40px 10px rgba(0, 255, 255, 0.7),
-        0 0 80px 20px rgba(255, 105, 180, 0.5);
+        0 0 20px 5px rgba(255, 0, 127, 0.9), /* Pembe parlama */
+        0 0 40px 10px rgba(0, 255, 255, 0.7), /* Mavi tonlu parlama */
+        0 0 80px 20px rgba(255, 105, 180, 0.5); /* Mora çalan dış parlama */
     animation: 
         pulse 1.5s infinite alternate, 
-        neon-glow 2s infinite alternate;
+        neon-glow 2s infinite alternate; /* Parlama animasyonu */
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1;
+    z-index: -1; /* Ana kalbin arkasında kalması için */
 }
 
 
-/* Mesaj Stilleri (Aynı kaldı) */
+/* Mesaj Stilleri */
 #message {
     font-family: 'Arial', sans-serif;
     font-size: 3em;
     color: #fff;
+    /* Güçlü neon metin parlama efekti */
     text-shadow: 
         0 0 7px #fff,
         0 0 10px #fff,
@@ -82,22 +84,23 @@ body {
         0 0 82px #ff007f,
         0 0 92px #ff007f,
         0 0 102px #ff007f,
-        0 0 151px #ff007f;
-    margin-top: 50px;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
+        0 0 151px #ff007f; 
+    margin-top: 50px; 
+    opacity: 0; /* Başlangıçta gizle */
+    transition: opacity 0.5s ease-in-out; /* Yumuşak geçiş */
 }
-
+/
 .visible {
-    opacity: 1 !important;
+    opacity: 1 !important; /* Mesajı görünür yapacak sınıf */
 }
 
-/* Animasyonlar (Aynı kaldı) */
+/* Kalp titreme animasyonu */
 @keyframes pulse {
     0% { transform: scale(1) rotate(-45deg); }
     100% { transform: scale(1.05) rotate(-45deg); }
 }
 
+/* Neon parlama animasyonu (Titreme) */
 @keyframes neon-glow {
     0% {
         box-shadow: 0 0 20px 5px rgba(255, 0, 127, 0.9), 0 0 40px 10px rgba(0, 255, 255, 0.7), 0 0 80px 20px rgba(255, 105, 180, 0.5);
