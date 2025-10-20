@@ -1,0 +1,111 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #000;
+    margin: 0;
+    overflow: hidden;
+}
+
+.heart-container {
+    position: relative;
+    /* Boyutları artırarak daha belirgin hale getiriyoruz */
+    width: 250px; 
+    height: 225px; 
+    transform: rotate(-45deg); 
+    cursor: pointer;
+}
+
+.heart,
+.heart::before,
+.heart::after {
+    content: '';
+    position: absolute;
+    /* Kalp parçalarının boyutlarını artırıyoruz */
+    width: 125px; 
+    height: 125px;
+    background-color: #ff007f;
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(255, 0, 127, 0.7);
+}
+
+.heart {
+    /* Kalp alt noktasının konumu */
+    left: 62.5px; 
+    top: 55px; /* Kalbin dikey pozisyonu */
+    animation: pulse 1.5s infinite alternate;
+}
+
+.heart::before {
+    /* Sol üst yuvarlak */
+    left: -62.5px; 
+    top: 0;
+}
+
+.heart::after {
+    /* Sağ üst yuvarlak */
+    left: 0;
+    top: -62.5px; 
+}
+
+/* Neon parlama efekti için ayrı bir katman (Boyutları ana kalp ile eşleşmeli) */
+.heart-glow {
+    background-color: transparent;
+    box-shadow:
+        0 0 20px 5px rgba(255, 0, 127, 0.9),
+        0 0 40px 10px rgba(0, 255, 255, 0.7),
+        0 0 80px 20px rgba(255, 105, 180, 0.5);
+    animation: 
+        pulse 1.5s infinite alternate, 
+        neon-glow 2s infinite alternate;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+
+/* Mesaj Stilleri (Aynı kaldı) */
+#message {
+    font-family: 'Arial', sans-serif;
+    font-size: 3em;
+    color: #fff;
+    text-shadow: 
+        0 0 7px #fff,
+        0 0 10px #fff,
+        0 0 21px #ff007f,
+        0 0 42px #ff007f,
+        0 0 82px #ff007f,
+        0 0 92px #ff007f,
+        0 0 102px #ff007f,
+        0 0 151px #ff007f;
+    margin-top: 50px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.visible {
+    opacity: 1 !important;
+}
+
+/* Animasyonlar (Aynı kaldı) */
+@keyframes pulse {
+    0% { transform: scale(1) rotate(-45deg); }
+    100% { transform: scale(1.05) rotate(-45deg); }
+}
+
+@keyframes neon-glow {
+    0% {
+        box-shadow: 0 0 20px 5px rgba(255, 0, 127, 0.9), 0 0 40px 10px rgba(0, 255, 255, 0.7), 0 0 80px 20px rgba(255, 105, 180, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 30px 8px rgba(255, 0, 127, 1), 0 0 60px 15px rgba(0, 255, 255, 0.8), 0 0 100px 25px rgba(255, 105, 180, 0.6);
+    }
+    100% {
+        box-shadow: 0 0 20px 5px rgba(255, 0, 127, 0.9), 0 0 40px 10px rgba(0, 255, 255, 0.7), 0 0 80px 20px rgba(255, 105, 180, 0.5);
+    }
+}
